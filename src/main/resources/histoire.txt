@@ -1,0 +1,8 @@
+Le client rentre dans la boutique
+Le client observe les rayons
+Le client choisi un/plusieurs films
+Le client se rend au comptoir
+Le client consulte la disponibilité des films qu'il à choisi
+Le client loue les films disponibles pour une durée de X heures
+Le client se rend au comptoir pour rendre les films
+On édite une facture pour le client
