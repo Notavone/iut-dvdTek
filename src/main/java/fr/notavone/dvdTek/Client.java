@@ -44,6 +44,15 @@ public class Client {
         for (Film f : films) choisis(f);
     }
 
+    public void neChoisisPlus(Film film) {
+        filmsChoisis.remove(film);
+    }
+
+    public void neChoisisPlus(List<Film> films) {
+        if (films == filmsChoisis) films = new ArrayList<>(filmsChoisis);
+        films.forEach(this::neChoisisPlus);
+    }
+
     public Location louer(List<Film> films, int nbJours) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
