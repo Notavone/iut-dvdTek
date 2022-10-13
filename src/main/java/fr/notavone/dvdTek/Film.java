@@ -12,12 +12,23 @@ public class Film {
     private final String genre;
     private final double msrp;
     private double categoriePrixMultiplicateur;
+    private boolean disponible;
 
-    public Film(String titre, String realisateur, String genre, double msrp) {
+    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, boolean disponible) {
         this.titre = titre;
         this.realisateur = realisateur;
         this.genre = genre;
         this.msrp = msrp;
+        this.categoriePrixMultiplicateur = DE_L_ANNEE_PASSEE;
+        this.disponible = disponible;
+    }
+
+    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur) {
+        this(titre, realisateur, genre, msrp, categoriePrixMultiplicateur, true);
+    }
+
+    public Film(String titre, String realisateur, String genre, double msrp) {
+        this(titre, realisateur, genre, msrp, NOUVEAU);
     }
 
     public String getTitre() {
@@ -48,4 +59,11 @@ public class Film {
         return msrp * categoriePrixMultiplicateur * (1 + Math.log10(nbJours));
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 }

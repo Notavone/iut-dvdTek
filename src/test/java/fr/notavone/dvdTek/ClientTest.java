@@ -1,8 +1,5 @@
 package fr.notavone.dvdTek;
 
-import fr.notavone.dvdTek.Boutique;
-import fr.notavone.dvdTek.Client;
-import fr.notavone.dvdTek.Rayon;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,7 +14,7 @@ public class ClientTest {
         Client client = new Client("Jean", "Dupont");
 
         Rayon rayon = Mockito.mock(Rayon.class);
-        ArrayList<Rayon> rayons = new ArrayList<Rayon>();
+        ArrayList<Rayon> rayons = new ArrayList<>();
         rayons.add(rayon);
 
         Boutique boutique = new Boutique(rayons);

@@ -1,4 +1,4 @@
-Le client rentre dans la boutique
+Le client rentre dans la boutique (enregistrer le client)
 Le client observe les rayons
 Le client choisi un/plusieurs films
 Le client se rend au comptoir
