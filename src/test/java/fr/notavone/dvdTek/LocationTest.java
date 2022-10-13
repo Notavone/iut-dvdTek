@@ -1,3 +1,9 @@
+package fr.notavone.dvdTek;
+
+import fr.notavone.dvdTek.Client;
+import fr.notavone.dvdTek.Film;
+import fr.notavone.dvdTek.Location;
+
 import java.util.ArrayList;
 import java.util.Date;
 

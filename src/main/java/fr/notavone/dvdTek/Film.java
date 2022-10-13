@@ -1,3 +1,5 @@
+package fr.notavone.dvdTek;
+
 public class Film {
     private static final double NOUVEAU = 1.5;
     private static final double RECENT = 1.2;

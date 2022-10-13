@@ -1,3 +1,5 @@
+package fr.notavone.dvdTek;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class Client {
     }
 
     public List<Rayon> visiter(Boutique boutique) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return boutique.getRayons();
     }
 
     public List<Film> observer(Rayon rayon) {

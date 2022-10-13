@@ -1,4 +1,7 @@
-import org.junit.Test;
+package fr.notavone.dvdTek;
+
+import fr.notavone.dvdTek.Boutique;
+import fr.notavone.dvdTek.Rayon;
 
 import java.util.ArrayList;
 
