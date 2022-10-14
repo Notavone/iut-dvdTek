@@ -1,0 +1,3 @@
+- créer une classe Support pour le dvd ou bluray ou K7 (influence sur le tarif)
+- créer une classe pour moyen de paiement du client, ( moyen de paiement ajouter dans la facture relative au client ?)
+-
