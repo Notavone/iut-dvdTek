@@ -9,7 +9,7 @@ public class FilmFactory {
     public static List<Film> getFilms() {
         List<Film> films = new ArrayList<Film>();
 
-        films.add(new Film("Le seigneur des anneaux", "Peter Jackson", "Fantastique", 2.56));
+      /*  films.add(new Film("Le seigneur des anneaux", "Peter Jackson", "Fantastique", 2.56));
         films.add(new Film("Matrix", "Les Wachowski", "Science-fiction", 2.56));
         films.add(new Film("Le parrain", "Francis Ford Coppola", "Policier", 2.56));
         films.add(new Film("Kung Fu Panda", "Mark Osborne", "Animation", 2.56));
@@ -24,7 +24,7 @@ public class FilmFactory {
         films.add(new Film("Les dents de la mer", "Steven Spielberg", "Horreur", 2.56));
         films.add(new Film("Les visiteurs", "Jean-Marie Poiré", "Comédie", 2.56));
         films.add(new Film("Dikkenek", "Dany Boon", "Comédie", 2.56));
-        films.add(new Film("Tintin au Tibet", "Steven Spielberg", "Animation", 2.56));
+        films.add(new Film("Tintin au Tibet", "Steven Spielberg", "Animation", 2.56));*/
 
         return films;
     }

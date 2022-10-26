@@ -1,6 +1,6 @@
 package fr.notavone.dvdTek;
 
-import fr.notavone.dvdTek.supports.Support;
+import fr.notavone.dvdTek.Support;
 
 public class Film {
     private static final double NOUVEAU = 1.5;
@@ -11,13 +11,13 @@ public class Film {
 
     private final String titre;
     private final String realisateur;
-    private final String genre;
+    private final Genre genre;
     private final double msrp;
     private double categoriePrixMultiplicateur;
     private boolean disponible;
     private final Support support;
 
-    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, boolean disponible, Support support) {
+    public Film(String titre, String realisateur, Genre genre, double msrp, double categoriePrixMultiplicateur, boolean disponible, Support support) {
         this.titre = titre;
         this.realisateur = realisateur;
         this.genre = genre;
@@ -27,11 +27,11 @@ public class Film {
         this.support = support;
     }
 
-    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, Support support) {
+    public Film(String titre, String realisateur, Genre genre, double msrp, double categoriePrixMultiplicateur, Support support) {
         this(titre, realisateur, genre, msrp, categoriePrixMultiplicateur, true, support);
     }
 
-    public Film(String titre, String realisateur, String genre, double msrp, Support support) {
+    public Film(String titre, String realisateur, Genre genre, double msrp, Support support) {
         this(titre, realisateur, genre, msrp, NOUVEAU, support);
     }
 
@@ -43,7 +43,7 @@ public class Film {
         return realisateur;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
@@ -69,5 +69,9 @@ public class Film {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public Support getSupport() {
+        return support;
     }
 }
