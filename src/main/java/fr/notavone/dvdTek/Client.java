@@ -10,6 +10,8 @@ public class Client {
     private final String adresse;
     private final ArrayList<Film> filmsChoisis;
 
+    private ComptePrepaye comptePrepaye;
+
     public Client(String nom, String prenom, String adresse) {
         this.nom = nom;
         this.prenom = prenom;
@@ -69,5 +71,13 @@ public class Client {
 
     public List<Film> getFilmsChoisis() {
         return filmsChoisis;
+    }
+
+    public ComptePrepaye getComptePrepaye() {
+        return comptePrepaye;
+    }
+
+    public void setComptePrepaye(ComptePrepaye comptePrepaye) {
+        this.comptePrepaye = comptePrepaye;
     }
 }

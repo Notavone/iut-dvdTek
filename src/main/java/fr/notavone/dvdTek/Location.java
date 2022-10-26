@@ -9,11 +9,17 @@ public class Location {
     private final Date dateLocation;
     private final Date dateRetour;
 
-    public Location(ArrayList<Film> films, Client client, Date dateLocation, Date dateRetour) {
+    private final MoyenDePaiement moyenDePaiement;
+
+    public Location(ArrayList<Film> films, Client client, Date dateLocation, Date dateRetour, MoyenDePaiement moyenDePaiement) {
         this.films = films;
         this.client = client;
         this.dateLocation = dateLocation;
         this.dateRetour = dateRetour;
+        this.moyenDePaiement = moyenDePaiement;
+    }
+    public Location(ArrayList<Film> films, Client client, Date dateLocation, Date dateRetour) {
+        this(films, client, dateLocation, dateRetour, MoyenDePaiement.CB);
     }
 
     public void renouveler(int nbJours) {
