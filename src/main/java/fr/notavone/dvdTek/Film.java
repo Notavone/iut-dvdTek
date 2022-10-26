@@ -1,5 +1,7 @@
 package fr.notavone.dvdTek;
 
+import fr.notavone.dvdTek.supports.Support;
+
 public class Film {
     private static final double NOUVEAU = 1.5;
     private static final double RECENT = 1.2;
@@ -13,22 +15,24 @@ public class Film {
     private final double msrp;
     private double categoriePrixMultiplicateur;
     private boolean disponible;
+    private final Support support;
 
-    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, boolean disponible) {
+    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, boolean disponible, Support support) {
         this.titre = titre;
         this.realisateur = realisateur;
         this.genre = genre;
         this.msrp = msrp;
         this.categoriePrixMultiplicateur = DE_L_ANNEE_PASSEE;
         this.disponible = disponible;
+        this.support = support;
     }
 
-    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur) {
-        this(titre, realisateur, genre, msrp, categoriePrixMultiplicateur, true);
+    public Film(String titre, String realisateur, String genre, double msrp, double categoriePrixMultiplicateur, Support support) {
+        this(titre, realisateur, genre, msrp, categoriePrixMultiplicateur, true, support);
     }
 
-    public Film(String titre, String realisateur, String genre, double msrp) {
-        this(titre, realisateur, genre, msrp, NOUVEAU);
+    public Film(String titre, String realisateur, String genre, double msrp, Support support) {
+        this(titre, realisateur, genre, msrp, NOUVEAU, support);
     }
 
     public String getTitre() {
