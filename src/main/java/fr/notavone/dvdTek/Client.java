@@ -7,11 +7,13 @@ public class Client {
     private final ArrayList<Location> locations;
     private final String nom;
     private final String prenom;
+    private final String adresse;
     private final ArrayList<Film> filmsChoisis;
 
-    public Client(String nom, String prenom) {
+    public Client(String nom, String prenom, String adresse) {
         this.nom = nom;
         this.prenom = prenom;
+        this.adresse = adresse;
         this.locations = new ArrayList<>();
         filmsChoisis = new ArrayList<>();
     }
@@ -19,7 +21,7 @@ public class Client {
     public String getNom() {
         return nom;
     }
-
+    public String getAdresse() { return adresse;}
     public String getPrenom() {
         return prenom;
     }
