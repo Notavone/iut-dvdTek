@@ -1,5 +1,6 @@
 package fr.notavone.dvdTek;
 
+import fr.notavone.dvdTek.supports.BlueRay;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -48,8 +49,8 @@ public class ClientTest {
         Client client = new Client("Jean", "Dupont");
 
         ArrayList<Film> films = new ArrayList<>();
-        films.add(new Film("f1", "f1", "f1", 1.1));
-        films.add(new Film("f2", "f2", "f2", 1.1));
+        films.add(new Film("f1", "f1", "f1", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f2", 1.1, new BlueRay()));
 
         ArrayList<Rayon> rayons = new ArrayList<>();
         rayons.add(new Rayon(films));
@@ -66,9 +67,9 @@ public class ClientTest {
         Client client = new Client("Jean", "Dupont");
 
         ArrayList<Film> films = new ArrayList<>();
-        films.add(new Film("f1", "f1", "f1", 1.1));
-        films.add(new Film("f2", "f2", "f2", 1.1));
-        films.add(new Film("f2", "f2", "f3", 1.1));
+        films.add(new Film("f1", "f1", "f1", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f2", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f3", 1.1, new BlueRay()));
 
         ArrayList<Rayon> rayons = new ArrayList<>();
         rayons.add(new Rayon(films));
@@ -86,9 +87,9 @@ public class ClientTest {
         Client client = new Client("Jean", "Dupont");
 
         ArrayList<Film> films = new ArrayList<>();
-        films.add(new Film("f1", "f1", "f1", 1.1));
-        films.add(new Film("f2", "f2", "f2", 1.1));
-        films.add(new Film("f2", "f2", "f3", 1.1));
+        films.add(new Film("f2", "f2", "f2", 1.1, new BlueRay()));
+        films.add(new Film("f1", "f1", "f1", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f3", 1.1, new BlueRay()));
 
         ArrayList<Rayon> rayons = new ArrayList<>();
         rayons.add(new Rayon(films));
@@ -105,9 +106,9 @@ public class ClientTest {
         Client client = new Client("Jean", "Dupont");
 
         ArrayList<Film> films = new ArrayList<>();
-        films.add(new Film("f1", "f1", "f1", 1.1));
-        films.add(new Film("f2", "f2", "f2", 1.1));
-        films.add(new Film("f2", "f2", "f3", 1.1));
+        films.add(new Film("f1", "f1", "f1", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f2", 1.1, new BlueRay()));
+        films.add(new Film("f2", "f2", "f3", 1.1, new BlueRay()));
 
         ArrayList<Rayon> rayons = new ArrayList<>();
         rayons.add(new Rayon(films));
