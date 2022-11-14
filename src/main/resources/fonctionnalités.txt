@@ -1,6 +1,9 @@
-- créer une classe Support pour le dvd ou bluray ou K7 (influence sur le tarif) --> OK
-- créer une classe pour moyen de paiement du client, ( moyen de paiement ajouter dans la facture relative au client ?) -->
-- client à un dénombrement de combien il a commander par support et par genre
-- client à une préférence en therme de catégorie (sortie récente)
-- gestion de la reservation pour une date
-- gestion d'un compte prépayé ( donne un avantage de remboursement si retour du film avant le date prévu)
+– la gestion de réservation de film pour une date (qui impacte la possibilité de sortir un exemplaire du film dans le courant de la journée de la réservation : l’agence doit conserver un exemplaire du film par réservation)
+– pour les titulaires d’un compte prépayé, un retour avant la date de retour prévu donne lieu à remboursement par tranche de 12h du temps non consommé. Exemple : une location initialement prévue sur 72h pour un montant de 9€ donnera lieu à un remboursement de :
+– 1,5€ pour un retour entre la 48ᵉ et la 60ᵉ heure
+– 3€ pour un retour entre la 36ᵉ et la 48ᵉ heure
+– 4,5€ pour un retour entre la 24ᵉ et la 36ᵉ heure
+– 6€ pour un retour entre la 12ᵉ et la 24ᵉ heure
+– 7,5€ pour un retour entre la 0ᵉ et la 12ᵉ heure
+– plus généralement :
+(prix de la location / (durée initiale de la location / 12) * nombre

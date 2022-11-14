@@ -9,10 +9,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        new Main().run();
+        run();
     }
 
-    public void run() {
+    public static void run() {
 
         Film film1 = new Film("Film 1", Film.SUPPORT_BLUE_RAY, 1);
         Film film2 = new Film("Film 2", Film.SUPPORT_DVD, 2);
@@ -41,6 +41,7 @@ public class Main {
 
             System.out.println("On vérifie que le compte est bien débité de " + location1.calculerPrix() + "€");
             System.out.println(roberto.resumer());
+            System.out.println(roberto.statisiques());
 
         } catch (FilmIndisponibleException | SoldeInsuffisantException e) {
             System.out.println(e.getMessage());

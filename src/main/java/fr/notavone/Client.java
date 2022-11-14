@@ -61,4 +61,56 @@ public class Client {
 
         return sb.toString();
     }
+
+    public String statisiques() {
+        int[] supports = {0, 0, 0};
+        int[] categories = {0, 0, 0, 0, 0};
+        int[] genres = {0, 0, 0, 0, 0};
+
+        for (Location l : listeLocations) {
+            for (Film f : l.getFilms()) {
+                supports[f.getSupport() - 1]++;
+                categories[f.getCategorie() - 1]++;
+                genres[f.getGenre() - 1]++;
+            }
+        }
+        int bestSupport = 0;
+        int bestCategory = 0;
+        int bestGenre = 0;
+        for (int i = 0; i < supports.length; i++) {if (supports[i] > supports[bestSupport]) bestSupport = i;}
+        for (int i = 0; i < categories.length; i++) {if (categories[i] > categories[bestCategory]) bestCategory = i;}
+        for (int i = 0; i < genres.length; i++) {if (genres[i] > genres[bestGenre]) bestGenre = i;}
+
+        String strSupport;
+        String strCategory;
+        String strGenre;
+        switch (bestSupport + 1) {
+            case 1 -> strSupport = "DVD";
+            case 2 -> strSupport = "Blue Ray";
+            case 3 -> strSupport = "K7";
+            default -> strSupport = "Inconnu";
+        }
+
+        switch (bestCategory + 1) {
+            case 1 -> strCategory = "Nouveau";
+            case 2 -> strCategory = "Récent";
+            case 3 -> strCategory = "De cette année";
+            case 4 -> strCategory = "De l'année passée";
+            case 5 -> strCategory = "Ancien";
+            default -> strCategory = "Inconnue";
+        }
+
+        switch (bestGenre + 1) {
+            case 1 -> strGenre = "Action";
+            case 2 -> strGenre = "Aventure";
+            case 3 -> strGenre = "Animé";
+            case 4 -> strGenre = "Comédie";
+            case 5 -> strGenre = "Drame";
+            default -> strGenre = "Inconnu";
+        }
+
+        return "Support préféré : " + strSupport + "\n" +
+                "Catégorie préférée : " + strCategory + "\n" +
+                "Genre préféré : " + strGenre + "\n";
+    }
 }
