@@ -2,20 +2,13 @@ package fr.notavone;
 
 import fr.notavone.exceptions.SoldeInsuffisantException;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Location {
     public static final int UN_JOUR = 1;
     public static final int DEUX_JOURS = 2;
     public static final int TROIS_JOURS = 3;
-
-    public static final int ZERO_DOUZE = 1;
-    public static final int DOUZE_VINGTQUATRE = 2;
-    public static final int VINGTQUATRE_TRENTESIX = 3;
-    public static final int TRENTESIX_QUARANTEHUIT = 4;
-    public static final int QUARANTEHUIT_SOIXANTE = 5;
 
     private final Client client;
     private final Agence agence;
@@ -59,7 +52,7 @@ public class Location {
         return duree;
     }
 
-    public void retourner(MoyenPaiement moyenPaiement) {
+    public void retourner() {
         for (Film film : films) {
             film.setLocation(null);
         }
@@ -80,28 +73,21 @@ public class Location {
             default -> prix *= 1;
         }
 
-        return prix;
+        return prix * duree;
     }
 
     public double calculerRemboursement() {
-        double remboursement = calculerPrix();
-        switch (duree) { //faut changer par rapport a la date de retour mais jsp comment car jsuis noopy
-            case ZERO_DOUZE -> remboursement *= 0.833;
-            case DOUZE_VINGTQUATRE -> remboursement *= 0.667;
-            case VINGTQUATRE_TRENTESIX -> remboursement *= 0.5;
-            case TRENTESIX_QUARANTEHUIT -> remboursement *= 0.33;
-            case QUARANTEHUIT_SOIXANTE -> remboursement *= 0.167;
-            default -> remboursement *= 0;
-        }
-        return remboursement;
+        Date date = new Date();
+        float diff = new Date(duree, this.date).hourDifference(date);
+        double d = (calculerPrix() / (duree * 2)) * ((diff / 12) - 1);
+        return (double) Math.round(d * 100) / 100;
     }
 
     public String resumer() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
         sb.append("-- Location de l'agence ").append(agence.getNom()).append(" --").append("\n");
         sb.append("Client: ").append(client.getNom()).append("\n");
-        sb.append("Durée: ").append(duree).append(" jours à partir du ").append(sdf.format(date)).append("\n");
+        sb.append("Durée: ").append(duree).append(" jours à partir du ").append(date.toString()).append("\n");
         sb.append("Films: ").append("\n");
 
         for (Film film : films) {
@@ -120,10 +106,27 @@ public class Location {
         montantDejaPaye += montant;
     }
 
-    public void retour() {
-        double montant = calculerRemboursement();
-        client.getComptePrepaye().credit(montant);
-        this.terminee = true;
+    public void retour(MoyenPaiement moyenPaiement) {
+        if (terminee) return;
+        Date dateFin = new Date(duree, date);
+        Date now = new Date();
+        // si rendu avant la fin
+        if (moyenPaiement == MoyenPaiement.COMPTE_PREPAYE && now.isBefore(dateFin)) {
+            double montant = calculerRemboursement();
+            System.out.println("Remboursement de : " + montant + "€");
+            client.getComptePrepaye().credit(montant);
+        }
+        // rendu en retard
+        if (now.isAfter(dateFin)) {
+            double montant = Math.abs(now.hourDifference(dateFin));
+            try {
+                client.getComptePrepaye().debit(montant);
+            } catch (SoldeInsuffisantException e) {
+                System.err.println("Le client ne peut pas payer sa facture de " + montant + "€");
+            }
+        }
+        terminee = true;
+        retourner();
     }
 
     public boolean estTerminee() {

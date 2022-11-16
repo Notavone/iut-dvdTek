@@ -118,4 +118,8 @@ public class Client {
                 "Catégorie préférée : " + strCategory + "\n" +
                 "Genre préféré : " + strGenre + "\n";
     }
+
+    public void retour(Location location, MoyenPaiement mp) {
+        location.retour(mp);
+    }
 }

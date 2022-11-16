@@ -15,7 +15,7 @@ public class Date {
         year = Integer.parseInt(DateTimeFormatter.ofPattern("yyyy").format(retour));
         month = Integer.parseInt(DateTimeFormatter.ofPattern("MM").format(retour));
         day = Integer.parseInt(DateTimeFormatter.ofPattern("dd").format(retour));
-        hour = Integer.parseInt(DateTimeFormatter.ofPattern("hh").format(retour));
+        hour = Integer.parseInt(DateTimeFormatter.ofPattern("HH").format(retour));
     }
 
     public Date() {
@@ -26,7 +26,7 @@ public class Date {
     }
 
     public Date(int nbJours, Date date) {
-        this(nbJours, LocalDateTime.of(date.year, date.month, date.day, 0, 0));
+        this(nbJours, LocalDateTime.of(date.year, date.month, date.day, new Date().hour, 0));
     }
 
     @Override
@@ -53,7 +53,16 @@ public class Date {
     public int hashCode() {
         int result = 365 * year;
         result = 31 * result + month;
-        result = result + day + hour / 24;
+        result = (result + day * 24) + hour;
         return result;
+    }
+
+    public int hourDifference(Date date) {
+        return hashCode() - date.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return year + "/" + month + "/" + day + ":" + hour + "h";
     }
 }
