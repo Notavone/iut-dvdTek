@@ -4,7 +4,6 @@ import fr.notavone.exceptions.FilmDejaReserve;
 import fr.notavone.exceptions.FilmIndisponibleException;
 import fr.notavone.exceptions.SoldeInsuffisantException;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Main {
@@ -73,5 +72,4 @@ public class Main {
         roberto.retour(location1, MoyenPaiement.COMPTE_PREPAYE);
         System.out.println("Roberto possède maintenant " + roberto.getComptePrepaye().getSolde() + "€");
     }
-
 }

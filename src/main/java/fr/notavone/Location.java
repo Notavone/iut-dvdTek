@@ -2,7 +2,6 @@ package fr.notavone;
 
 import fr.notavone.exceptions.SoldeInsuffisantException;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class Location {
