@@ -51,16 +51,19 @@ public class Main {
 
         /* RÉSERVATION */
         try {
-            toto.reserver(film5, new Date(1), Location.TROIS_JOURS);
+            System.out.println("Toto réserve film5 aujourd'hui pour 3 jours");
+            toto.reserver(film5, new Date(), Location.TROIS_JOURS);
         } catch (FilmDejaReserve e) {
             System.out.println(e.getMessage());
         }
 
         // déjà réservé
         try {
+            System.out.println("Roberto veut louer film5.");
             roberto.louerFilms(agence, List.of(film5), Location.UN_JOUR, MoyenPaiement.COMPTE_PREPAYE);
         } catch (SoldeInsuffisantException | FilmIndisponibleException e) {
             System.out.println(e.getMessage());
+            System.out.println("Mais il est réservé par toto !");
         }
     }
 
