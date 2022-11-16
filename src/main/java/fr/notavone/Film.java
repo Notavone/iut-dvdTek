@@ -1,5 +1,9 @@
 package fr.notavone;
 
+import fr.notavone.exceptions.FilmDejaReserve;
+
+import java.util.ArrayList;
+
 public class Film {
     /* SUPPORTS */
     public static final int SUPPORT_DVD = 1;
@@ -23,11 +27,12 @@ public class Film {
 
     private final String titre;
     private final int support;
-    private int categorie;
+    private final int categorie;
 
-    private int genre;
+    private final int genre;
     private double prixLocation;
     private Location location;
+    private final ArrayList<Reservation> reservations;
 
     public Film(String titre, int support, int categorie, int genre, double prixLocation) {
         this.titre = titre;
@@ -35,6 +40,7 @@ public class Film {
         this.categorie = categorie;
         this.genre = genre;
         this.prixLocation = prixLocation;
+        reservations = new ArrayList<>();
     }
 
     public Film(String titre, int support, double prixLocation) {
@@ -53,10 +59,6 @@ public class Film {
         return categorie;
     }
 
-    public void setCategorie(int categorie) {
-        this.categorie = categorie;
-    }
-
     public void setPrixLocation(double prixLocation) {
         this.prixLocation = prixLocation;
     }
@@ -71,10 +73,6 @@ public class Film {
 
     public int getGenre() {
         return genre;
-    }
-
-    public void setGenre(int genre) {
-        this.genre = genre;
     }
 
     public double getPrixLocation() {
@@ -95,5 +93,31 @@ public class Film {
         }
 
         return prixLocation * multiplicateur;
+    }
+
+    public void reserve(Reservation res) throws FilmDejaReserve {
+        if (reservations.stream().anyMatch(r ->
+                r.film() == res.film() &&
+                !(r.dateFin().isBefore(res.dateDebut()) || r.dateDebut().isAfter(res.dateFin()))
+        )) {
+            throw new FilmDejaReserve();
+        }
+        reservations.add(res);
+    }
+
+    public boolean isAvailable(Client client, Date date, int duration) {
+        //  already rent by someone
+        if (getLocation() != null) return false;
+        return (reservations.stream().noneMatch(r -> {
+            // same client => not a problem
+            if (r.client() == client) return false;
+            Date dateFin = new Date(duration, date);
+            // same end date
+            if (r.dateFin().equals(dateFin)) return true;
+            // same start date
+            if (r.dateDebut().equals(date)) return true;
+            // both dates are overlapping
+            return !(r.dateFin().isBefore(date) || r.dateDebut().isAfter(dateFin));
+        }));
     }
 }

@@ -1,5 +1,6 @@
 package fr.notavone;
 
+import fr.notavone.exceptions.FilmDejaReserve;
 import fr.notavone.exceptions.FilmIndisponibleException;
 import fr.notavone.exceptions.SoldeInsuffisantException;
 
@@ -26,7 +27,7 @@ public class Client {
     }
 
     public Location louerFilms(Agence agence, List<Film> films, int duree, MoyenPaiement moyenPaiement) throws FilmIndisponibleException, SoldeInsuffisantException {
-        boolean contientIndisponible = agence.getFilms().stream().anyMatch(film -> film.getLocation() != null);
+        boolean contientIndisponible = agence.getFilms().stream().anyMatch(film -> films.contains(film) && !film.isAvailable(this, new Date(0), duree));
         if (contientIndisponible) {
             throw new FilmIndisponibleException();
         }
@@ -60,6 +61,10 @@ public class Client {
         sb.append("Montant sur le compte prépayé : ").append(comptePrepaye.getSolde()).append("€").append("\n");
 
         return sb.toString();
+    }
+
+    public void reserver(Film film, Date date, int duree) throws FilmDejaReserve {
+        film.reserve(new Reservation(this, date, new Date(duree), film));
     }
 
     public String statisiques() {

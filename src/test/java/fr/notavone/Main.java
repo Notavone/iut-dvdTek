@@ -1,5 +1,6 @@
 package fr.notavone;
 
+import fr.notavone.exceptions.FilmDejaReserve;
 import fr.notavone.exceptions.FilmIndisponibleException;
 import fr.notavone.exceptions.SoldeInsuffisantException;
 
@@ -18,9 +19,10 @@ public class Main {
         Film film2 = new Film("Film 2", Film.SUPPORT_DVD, 2);
         Film film3 = new Film("Film 3", Film.SUPPORT_DVD, 3);
         Film film4 = new Film("Film 4", Film.SUPPORT_BLUE_RAY, 4);
-        Film film5 = new Film("Film 5", Film.SUPPORT_BLUE_RAY, 5);
+        Film film5 = new Film("Film 5", Film.SUPPORT_BLUE_RAY, 0);
 
         Client roberto = new Client("Roberto");
+        Client toto = new Client("toto");
 
         System.out.println(roberto.resumer());
 
@@ -44,6 +46,20 @@ public class Main {
             System.out.println(roberto.statisiques());
 
         } catch (FilmIndisponibleException | SoldeInsuffisantException e) {
+            System.out.println(e.getMessage());
+        }
+
+        /* RÉSERVATION */
+        try {
+            toto.reserver(film5, new Date(1), Location.TROIS_JOURS);
+        } catch (FilmDejaReserve e) {
+            System.out.println(e.getMessage());
+        }
+
+        // déjà réservé
+        try {
+            roberto.louerFilms(agence, List.of(film5), Location.UN_JOUR, MoyenPaiement.COMPTE_PREPAYE);
+        } catch (SoldeInsuffisantException | FilmIndisponibleException e) {
             System.out.println(e.getMessage());
         }
     }
