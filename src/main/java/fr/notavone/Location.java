@@ -11,6 +11,12 @@ public class Location {
     public static final int DEUX_JOURS = 2;
     public static final int TROIS_JOURS = 3;
 
+    public static final int ZERO_DOUZE = 1;
+    public static final int DOUZE_VINGTQUATRE = 2;
+    public static final int VINGTQUATRE_TRENTESIX = 3;
+    public static final int TRENTESIX_QUARANTEHUIT = 4;
+    public static final int QUARANTEHUIT_SOIXANTE = 5;
+
     private final Client client;
     private final Agence agence;
     private final List<Film> films;
@@ -77,6 +83,19 @@ public class Location {
         return prix;
     }
 
+    public double calculerRemboursement() {
+        double remboursement = calculerPrix();
+        switch (duree) { //faut changer par rapport a la date de retour mais jsp comment car jsuis noopy
+            case ZERO_DOUZE -> remboursement *= 0.833;
+            case DOUZE_VINGTQUATRE -> remboursement *= 0.667;
+            case VINGTQUATRE_TRENTESIX -> remboursement *= 0.5;
+            case TRENTESIX_QUARANTEHUIT -> remboursement *= 0.33;
+            case QUARANTEHUIT_SOIXANTE -> remboursement *= 0.167;
+            default -> remboursement *= 0;
+        }
+        return remboursement;
+    }
+
     public String resumer() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
@@ -102,6 +121,8 @@ public class Location {
     }
 
     public void retour() {
+        double montant = calculerRemboursement();
+        client.getComptePrepaye().credit(montant);
         this.terminee = true;
     }
 
